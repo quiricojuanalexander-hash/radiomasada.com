@@ -39,7 +39,7 @@
     <div id="radio_gmt" style="display:none"></div>
     <div id="radio_id_tag" style="display:none">3429603</div>
     <div id="stream_type" style="display:none">audio</div>
-    <div id="urladdress" style="display:none">https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_30011_stream_191106628</div>
+    <div id="urladdress" style="display:none">http://uk26freenew.listen2myradio.com:30818/;stream.mp3</div>
 
     <main id="main-content" class="main-wrapper">
         <div class="content-area">
@@ -154,10 +154,11 @@
                 supplied: 'mp3',
                 smoothPlayBar: true,
                 keyEnabled: true,
-                audioFullScreen: true
+                audioFullScreen: true,
+                solution: 'html, flash'
             });
 
-            jplayer.on($.jPlayer.event.error, function() {
+            jplayer.on($.jPlayer.event.error, function(e) {
                 statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
             });
             jplayer.on($.jPlayer.event.waiting, function() {
@@ -168,6 +169,17 @@
             });
             jplayer.on($.jPlayer.event.pause, function() {
                 statusText.text('Pausado').addClass('offline');
+            });
+        }
+
+        function refreshStreamUrl() {
+            $.get('https://oremrdorg.radiostream321.com/index.php', function(html) {
+                var match = html.match(/id="urladdress">\s*([^<]+)/);
+                if (match && match[1]) {
+                    var newUrl = match[1].trim();
+                    $('#urladdress').text(newUrl);
+                    statusText.text('URL del stream actualizada. Recarga para aplicar.').removeClass('offline');
+                }
             });
         }
 
