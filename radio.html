@@ -7,11 +7,39 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .jp-video { margin: 0 auto; max-width: 640px; }
+        .jp-video-270p { width: 100%; }
+        .jp-interface { background: #222 !important; }
+        .jp-controls-holder { background: #333 !important; }
+        .jp-progress { background: #444 !important; }
+        .jp-seek-bar { background: #555 !important; }
+        .jp-play-bar { background: #f90 !important; }
+        .jp-volume-bar { background: #444 !important; }
+        .jp-volume-bar-value { background: #f90 !important; }
+        .jp-current-time, .jp-duration { color: #ccc !important; }
+        .radio-player-wrap { background: #1a1a2e; border-radius: 16px; padding: 30px; text-align: center; margin: 20px 0; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .radio-player-wrap h2 { color: #f90; font-family: 'Oswald', sans-serif; font-size: 28px; margin-bottom: 5px; }
+        .radio-player-wrap p { color: #aaa; margin-bottom: 20px; }
+        .radio-status-text { color: #4caf50; font-size: 14px; margin-top: 10px; }
+        .radio-status-text.offline { color: #f44336; }
+        .jplayer-container { display: flex; justify-content: center; }
+        #urladdress { display: none; }
+        #stream_type { display: none; }
+        #radio_id_tag { display: none; }
+        #radio_gmt { display: none; }
+    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Ir al contenido principal</a>
     <header class="site-header"><div class="header-inner"><div class="logo"><a href="index.html">OREMRD</a></div><nav class="main-nav"><button class="menu-toggle" aria-label="Menú"><i class="fas fa-bars"></i></button><ul class="nav-links"><li><a href="index.html">INICIO</a></li><li><a href="nosotros.html">NOSOTROS</a></li><li><a href="radio.html" class="active">RADIO</a></li><li><a href="contacto.html">CONTACTO</a></li></ul><div class="nav-actions"><button id="searchToggle" class="nav-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></button><button id="darkModeToggle" class="nav-icon-btn" aria-label="Modo oscuro"><i class="fas fa-moon"></i></button></div></nav></div></header>
     <div id="searchOverlay" class="search-overlay"><div class="search-box"><button id="searchClose" class="search-close"><i class="fas fa-times"></i></button><h3><i class="fas fa-search"></i> Buscar en OREMRD</h3><input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off"><div id="searchResults" class="search-results"></div></div></div>
+
+    <div id="radio_gmt" style="display:none"></div>
+    <div id="radio_id_tag" style="display:none">3429603</div>
+    <div id="stream_type" style="display:none">audio</div>
+    <div id="urladdress" style="display:none">https://uk4freenew.listen2myradio.com/live.mp3?typeportmount=s1_26089_stream_119161824</div>
 
     <main id="main-content" class="main-wrapper">
         <div class="content-area">
@@ -19,39 +47,56 @@
                 <div class="post-content">
                     <h1 class="post-title-large"><i class="fas fa-broadcast-tower"></i> RADIO MASADA</h1>
                     <div class="post-body">
-                        <div class="radio-hero">
-                            <div class="radio-hero-icon"><i class="fas fa-headphones"></i></div>
-                            <h2>Escúchanos en vivo</h2>
-                            <p>¡Gracias por visitarnos! Para escuchar nuestra emisora en línea, haz clic en el reproductor de radio. ¡Es así de fácil comenzar a recibir palabra y bendición a través de nuestra programación cristiana!</p>
-                            <p>Que el Dios Todopoderoso bendiga abundantemente tu vida y la de tu familia en este hermoso día. <strong>Somos un ministerio familiar, guiado por el amor de Cristo.</strong></p>
-                        
-                            <!-- El script principal (script.js) encontrará y controlará este elemento de audio -->
-                            <audio id="main-radio-audio" preload="none"></audio>
-                        </div>
-
-                        <!-- Radio Player Grande -->
-                        <div class="radio-player-large">
-                            <div class="radio-player-info">
-                                <div class="radio-now-playing">
-                                    <div class="radio-album-art"><i class="fas fa-music"></i></div>
-                                    <div class="radio-track-info">
-                                        <span class="radio-station-name">Radio Masada</span>
-                                        <span class="radio-status" id="radioStatus">En vivo — Haz clic para escuchar</span>
+                        <div class="radio-player-wrap">
+                            <h2>Escucha Radio Masada en Vivo</h2>
+                            <p>¡Gracias por visitarnos! Disfruta de nuestra programación cristiana en vivo.</p>
+                            <div class="jplayer-container">
+                                <div id="jp_container_1" class="jp-video jp-video-270p" role="application" aria-label="media player">
+                                    <div class="jp-type-playlist">
+                                        <div class="jp-gui">
+                                            <div class="jp-video-play">
+                                                <a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+                                            </div>
+                                            <div class="jp-interface">
+                                                <div class="jp-progress">
+                                                    <div class="jp-seek-bar">
+                                                        <div class="jp-play-bar"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+                                                <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+                                                <div class="jp-controls-holder">
+                                                    <div class="jp-volume-controls">
+                                                        <button class="jp-mute" tabindex="1" role="button" aria-label="mute">mute</button>
+                                                        <button class="jp-volume-max" tabindex="1" role="button" aria-label="max volume">max volume</button>
+                                                        <div class="jp-volume-bar">
+                                                            <div class="jp-volume-bar-value"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="jp-controls">
+                                                        <button class="jp-play" tabindex="1" role="button" aria-label="play">play</button>
+                                                        <button class="jp-pause" tabindex="1" role="button" aria-label="pause">pause</button>
+                                                    </div>
+                                                    <div class="jp-toggles">
+                                                        <button class="jp-repeat" tabindex="1" role="button" aria-label="repeat">repeat</button>
+                                                        <button class="jp-shuffle" tabindex="1" role="button" aria-label="shuffle">shuffle</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jp-playlist">
+                                            <ul>
+                                                <li>&nbsp;</li>
+                                            </ul>
+                                        </div>
+                                        <div class="jp-no-solution">
+                                            <span>Update Required</span>
+                                            To play the media you will need to either update your browser to a recent version or update your <a href="https://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="radio-controls">
-                                <button class="radio-play-large" id="radioPlayLarge" aria-label="Reproducir">
-                                    <i class="fas fa-play"></i>
-                                </button>
-                                <div class="radio-visualizer-large" id="radioVisualizer">
-                                    <span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span>
-                                </div>
-                                <div class="radio-volume-large">
-                                    <i class="fas fa-volume-up"></i>
-                                    <input type="range" min="0" max="100" value="80" class="volume-slider-large" id="volumeSlider">
-                                </div>
-                            </div>
+                            <div class="radio-status-text" id="radioStatusText">Conectando...</div>
                         </div>
 
                         <h2 class="section-subtitle">Programación</h2>
@@ -86,7 +131,84 @@
             <div class="widget widget-countries"><h3 class="widget-title">PAISES</h3><div class="countries-list"><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_the_Dominican_Republic.svg" alt="RD"><span>República Dominicana</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Flag_of_Cuba.svg" alt="Cuba"><span>Cuba</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg" alt="PR"><span>Puerto Rico</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="US"><span>Estados Unidos</span></div></div></div>
         </aside>
     </main>
+
     <footer class="site-footer"><div class="footer-inner"><div class="footer-columns"><div class="footer-col"><h3>OREMRD</h3><p>Organización Evangélica Misionera de la República Dominicana.</p></div><div class="footer-col"><h3>ENLACES</h3><ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="radio.html">Radio</a></li></ul></div><div class="footer-col"><h3>SIGUENOS</h3><div class="footer-social-links"><a href="https://www.facebook.com/oremdr" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a><a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 <a href="index.html">OREMRD</a></p></div></div></footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/add-on/jplayer.playlist.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        var statusText = $('#radioStatusText');
+        var jplayer = $('#jquery_jplayer_1');
+
+        function initPlayer(streamUrl) {
+            new jPlayerPlaylist({
+                jPlayer: '#jquery_jplayer_1',
+                cssSelectorAncestor: '#jp_container_1'
+            }, [
+                { mp3: streamUrl }
+            ], {
+                playlistOptions: { autoPlay: false },
+                swfPath: 'https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer',
+                supplied: 'mp3',
+                smoothPlayBar: true,
+                keyEnabled: true,
+                audioFullScreen: true
+            });
+
+            jplayer.on($.jPlayer.event.error, function() {
+                statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
+            });
+            jplayer.on($.jPlayer.event.waiting, function() {
+                statusText.text('Cargando...').removeClass('offline');
+            });
+            jplayer.on($.jPlayer.event.playing, function() {
+                statusText.text('Reproduciendo en vivo').removeClass('offline');
+            });
+            jplayer.on($.jPlayer.event.pause, function() {
+                statusText.text('Pausado').addClass('offline');
+            });
+        }
+
+        var urlstream = $('#urladdress').html().trim();
+        initPlayer(urlstream);
+
+        new jPlayerPlaylist({
+            jPlayer: '#jquery_jplayer_1',
+            cssSelectorAncestor: '#jp_container_1'
+        }, [
+            {
+                mp3: urlstream
+            }
+        ], {
+            playlistOptions: {
+                autoPlay: false
+            },
+            swfPath: 'https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer',
+            supplied: 'mp3,oga',
+            smoothPlayBar: true,
+            keyEnabled: true,
+            audioFullScreen: true
+        });
+
+        $('#jquery_jplayer_1').on($.jPlayer.event.error, function(e) {
+            statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
+        });
+
+        $('#jquery_jplayer_1').on($.jPlayer.event.waiting, function() {
+            statusText.text('Cargando...').removeClass('offline');
+        });
+
+        $('#jquery_jplayer_1').on($.jPlayer.event.playing, function() {
+            statusText.text('Reproduciendo en vivo').removeClass('offline');
+        });
+
+        $('#jquery_jplayer_1').on($.jPlayer.event.pause, function() {
+            statusText.text('Pausado').addClass('offline');
+        });
+    });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // URL del stream: se puede configurar por el usuario y se guarda en localStorage
     var storedURL = localStorage.getItem('oremrd_stream_url');
     // Forzar la URL solicitada por el usuario (primaria)
-    var forcedURL = 'https://uk26freenew.listen2myradio.com/live.mp3?typeportmount=s1_33697_stream_32945930';
+    var forcedURL = 'https://uk4freenew.listen2myradio.com/live.mp3?typeportmount=s1_26089_stream_119161824';
     var radioStreamURL = forcedURL;
     try { localStorage.setItem('oremrd_stream_url', radioStreamURL); } catch (e) { /* ignorar si storage no está disponible */ }
     // Fallback conocido que devuelve audio/mpeg (usado cuando la URL primaria no sirve)
-    var radioFallbackURL = 'https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=8959&type=s2&mount=1';
+    var radioFallbackURL = 'https://uk4freenew.listen2myradio.com/live.mp3?typeportmount=s1_26089_stream_119161824';
     // La siguiente línea ha sido deshabilitada para usar la URL principal solicitada.
     // radioStreamURL = radioFallbackURL;
     // try { localStorage.setItem('oremrd_stream_url', radioStreamURL); } catch (e) { /* ignorar si storage no está disponible */ }
