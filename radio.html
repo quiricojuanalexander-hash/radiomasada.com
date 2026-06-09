@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Masada - OREMRD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <header class="site-header"><div class="header-inner"><div class="logo"><a href="index.html">OREMRD</a></div><nav class="main-nav"><button class="menu-toggle" aria-label="Menú"><i class="fas fa-bars"></i></button><ul class="nav-links"><li><a href="index.html">INICIO</a></li><li><a href="nosotros.html">NOSOTROS</a></li><li><a href="radio.html" class="active">RADIO</a></li><li><a href="contacto.html">CONTACTO</a></li></ul><div class="nav-actions"><button id="searchToggle" class="nav-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></button><button id="darkModeToggle" class="nav-icon-btn" aria-label="Modo oscuro"><i class="fas fa-moon"></i></button></div></nav></div></header>
+    <div id="searchOverlay" class="search-overlay"><div class="search-box"><button id="searchClose" class="search-close"><i class="fas fa-times"></i></button><h3><i class="fas fa-search"></i> Buscar en OREMRD</h3><input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off"><div id="searchResults" class="search-results"></div></div></div>
+
+    <main id="main-content" class="main-wrapper">
+        <div class="content-area">
+            <article class="post-card post-full">
+                <div class="post-content">
+                    <h1 class="post-title-large"><i class="fas fa-broadcast-tower"></i> RADIO MASADA</h1>
+                    <div class="post-body">
+                        <div class="radio-hero">
+                            <div class="radio-hero-icon"><i class="fas fa-headphones"></i></div>
+                            <h2>Escúchanos en vivo</h2>
+                            <p>¡Gracias por visitarnos! Para escuchar nuestra emisora en línea, haz clic en el reproductor de radio. ¡Es así de fácil comenzar a recibir palabra y bendición a través de nuestra programación cristiana!</p>
+                            <p>Que el Dios Todopoderoso bendiga abundantemente tu vida y la de tu familia en este hermoso día. <strong>Somos un ministerio familiar, guiado por el amor de Cristo.</strong></p>
+                        
+                            <!-- El script principal (script.js) encontrará y controlará este elemento de audio -->
+                            <audio id="main-radio-audio" preload="none"></audio>
+                        </div>
+
+                        <!-- Radio Player Grande -->
+                        <div class="radio-player-large">
+                            <div class="radio-player-info">
+                                <div class="radio-now-playing">
+                                    <div class="radio-album-art"><i class="fas fa-music"></i></div>
+                                    <div class="radio-track-info">
+                                        <span class="radio-station-name">Radio Masada</span>
+                                        <span class="radio-status" id="radioStatus">En vivo — Haz clic para escuchar</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="radio-controls">
+                                <button class="radio-play-large" id="radioPlayLarge" aria-label="Reproducir">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="radio-visualizer-large" id="radioVisualizer">
+                                    <span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span>
+                                </div>
+                                <div class="radio-volume-large">
+                                    <i class="fas fa-volume-up"></i>
+                                    <input type="range" min="0" max="100" value="80" class="volume-slider-large" id="volumeSlider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="section-subtitle">Programación</h2>
+                        <div class="schedule-grid">
+                            <div class="schedule-item"><div class="schedule-time">6:00 AM</div><div class="schedule-info"><h3>Devocional de la Mañana</h3><p>Comienza tu día con una reflexión bíblica poderosa.</p></div></div>
+                            <div class="schedule-item"><div class="schedule-time">9:00 AM</div><div class="schedule-info"><h3>Música de Adoración</h3><p>Las mejores canciones de alabanza y adoración.</p></div></div>
+                            <div class="schedule-item"><div class="schedule-time">12:00 PM</div><div class="schedule-info"><h3>La Palabra al Mediodía</h3><p>Enseñanzas bíblicas para fortalecer tu fe.</p></div></div>
+                            <div class="schedule-item"><div class="schedule-time">3:00 PM</div><div class="schedule-info"><h3>Testimonios de Fe</h3><p>Historias reales de personas transformadas por Dios.</p></div></div>
+                            <div class="schedule-item"><div class="schedule-time">7:00 PM</div><div class="schedule-info"><h3>Culto en Vivo</h3><p>Transmisión en directo del servicio de la iglesia.</p></div></div>
+                            <div class="schedule-item"><div class="schedule-time">10:00 PM</div><div class="schedule-info"><h3>Música Instrumental</h3><p>Melodías suaves para cerrar el día en paz.</p></div></div>
+                        </div>
+
+                        <div class="post-divider"></div>
+                        <p class="share-cta"><strong>¡COMPARTE EN TUS REDES SOCIALES!</strong></p>
+                    </div>
+                    <div class="post-footer">
+                        <a href="index.html" class="read-more"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="share-btn email-share"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <aside class="sidebar">
+            <div class="widget widget-follow"><h3 class="widget-title">SIGUENOS</h3><div class="social-links"><a href="https://www.facebook.com/oremdr" target="_blank" class="social-link facebook-link"><i class="fab fa-facebook-f"></i><span>Facebook</span></a><a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank" class="social-link youtube-link"><i class="fab fa-youtube"></i><span>YouTube</span></a></div></div>
+            <div class="widget widget-recent"><h3 class="widget-title">RECIENTES</h3><ul class="recent-posts"><li><a href="post1.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>DIOS NO HA TERMINADO CONTIGO</h4><p>A veces sentimos que hemos fallado demasiado...</p></div></a></li><li><a href="post2.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>LA DIGNIDAD DE UN CRISTIANO</h4><p>La punta de lanza de todo buen cristiano...</p></div></a></li><li><a href="post3.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>TODAVÍA NO ES EL FINAL</h4><p>Por experiencia propia sé lo decepcionante...</p></div></a></li></ul></div>
+            <div class="widget widget-newsletter"><h3 class="widget-title">SUSCRÍBETE</h3><p class="newsletter-text">Recibe devocionales en tu correo</p><form id="newsletterForm" class="newsletter-form"><input type="email" placeholder="Tu correo electrónico" required><button type="submit"><i class="fas fa-paper-plane"></i> Suscribirse</button></form><span class="subscriber-count"><span id="subscriberCount">0</span> suscritos</span></div>
+            <div class="widget widget-countries"><h3 class="widget-title">PAISES</h3><div class="countries-list"><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_the_Dominican_Republic.svg" alt="RD"><span>República Dominicana</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Flag_of_Cuba.svg" alt="Cuba"><span>Cuba</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg" alt="PR"><span>Puerto Rico</span></div><div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="US"><span>Estados Unidos</span></div></div></div>
+        </aside>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><div class="footer-columns"><div class="footer-col"><h3>OREMRD</h3><p>Organización Evangélica Misionera de la República Dominicana.</p></div><div class="footer-col"><h3>ENLACES</h3><ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="radio.html">Radio</a></li></ul></div><div class="footer-col"><h3>SIGUENOS</h3><div class="footer-social-links"><a href="https://www.facebook.com/oremdr" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a><a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 <a href="index.html">OREMRD</a></p></div></div></footer>
+    <script src="script.js"></script>
+</body>
+</html>

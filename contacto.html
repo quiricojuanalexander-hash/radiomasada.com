@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - OREMRD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <div class="reading-progress-bar"><div id="readingProgress" class="reading-progress"></div></div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo"><a href="index.html">OREMRD</a></div>
+            <nav class="main-nav">
+                <button class="menu-toggle" aria-label="Menú"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">INICIO</a></li>
+                    <li><a href="nosotros.html">NOSOTROS</a></li>
+                    <li><a href="radio.html">RADIO</a></li>
+                    <li><a href="contacto.html" class="active">CONTACTO</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button id="searchToggle" class="nav-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                    <button id="darkModeToggle" class="nav-icon-btn" aria-label="Modo oscuro"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-box">
+            <button id="searchClose" class="search-close"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-search"></i> Buscar en OREMRD</h3>
+            <input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <main id="main-content" class="main-wrapper">
+        <div class="content-area">
+            <article class="post-card post-full">
+                <div class="post-content">
+                    <h1 class="post-title-large"><i class="fas fa-envelope"></i> CONTACTO</h1>
+                    <div class="post-body">
+                        <p>¿Tienes alguna pregunta, petición de oración o deseas comunicarte con nosotros? Llena el siguiente formulario y te responderemos lo antes posible. ¡Dios te bendiga!</p>
+
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="contactName"><i class="fas fa-user"></i> Tu nombre</label>
+                                <input type="text" id="contactName" placeholder="Escribe tu nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail"><i class="fas fa-envelope"></i> Tu correo electrónico</label>
+                                <input type="email" id="contactEmail" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject"><i class="fas fa-tag"></i> Asunto</label>
+                                <select id="contactSubject">
+                                    <option value="general">Consulta General</option>
+                                    <option value="oracion">Petición de Oración</option>
+                                    <option value="radio">Radio Masada</option>
+                                    <option value="ministerio">Información del Ministerio</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage"><i class="fas fa-comment"></i> Tu mensaje</label>
+                                <textarea id="contactMessage" rows="6" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            </div>
+                            <button type="submit" class="contact-submit"><i class="fas fa-paper-plane"></i> Enviar Mensaje</button>
+                        </form>
+
+                        <div class="contact-info-grid">
+                            <div class="contact-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h3>Ubicación</h3>
+                                <p>Puerto Rico / República Dominicana</p>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-globe"></i>
+                                <h3>Sitio Web</h3>
+                                <p><a href="https://www.oremrd1.org" target="_blank">www.oremrd1.org</a></p>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fab fa-facebook-f"></i>
+                                <h3>Facebook</h3>
+                                <p><a href="https://www.facebook.com/oremdr" target="_blank">facebook.com/oremdr</a></p>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fab fa-youtube"></i>
+                                <h3>YouTube</h3>
+                                <p><a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank">Canal OREMRD</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <aside class="sidebar">
+            <div class="widget widget-follow">
+                <h3 class="widget-title">SIGUENOS</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/oremdr" target="_blank" rel="noopener" class="social-link facebook-link"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+                    <a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank" rel="noopener" class="social-link youtube-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+                </div>
+            </div>
+            <div class="widget widget-newsletter">
+                <h3 class="widget-title">SUSCRÍBETE</h3>
+                <p class="newsletter-text">Recibe devocionales en tu correo</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Suscribirse</button>
+                </form>
+                <span class="subscriber-count"><span id="subscriberCount">0</span> suscritos</span>
+            </div>
+            <div class="widget widget-recent">
+                <h3 class="widget-title">RECIENTES</h3>
+                <ul class="recent-posts">
+                    <li><a href="post1.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>DIOS NO HA TERMINADO CONTIGO</h4><p>A veces sentimos que hemos fallado demasiado...</p></div></a></li>
+                    <li><a href="post2.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>LA DIGNIDAD DE UN CRISTIANO</h4><p>La punta de lanza de todo buen cristiano...</p></div></a></li>
+                </ul>
+            </div>
+            <div class="widget widget-countries">
+                <h3 class="widget-title">PAISES</h3>
+                <div class="countries-list">
+                    <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_the_Dominican_Republic.svg" alt="RD"><span>República Dominicana</span></div>
+                    <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Flag_of_Cuba.svg" alt="Cuba"><span>Cuba</span></div>
+                    <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg" alt="PR"><span>Puerto Rico</span></div>
+                    <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="US"><span>Estados Unidos</span></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-columns">
+                <div class="footer-col"><h3>OREMRD</h3><p>Organización Evangélica Misionera de la República Dominicana.</p></div>
+                <div class="footer-col"><h3>ENLACES</h3><ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="radio.html">Radio</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+                <div class="footer-col"><h3>SIGUENOS</h3><div class="footer-social-links"><a href="https://www.facebook.com/oremdr" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a><a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 <a href="index.html">OREMRD</a> — Todos los derechos reservados</p></div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

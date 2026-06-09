@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Radio Masada</title>
+
+<style>
+body {
+    background: #111;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.player {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background: orange;
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="player">
+    <h2>📻 Radio Masada</h2>
+    
+    <audio id="radio" src="https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=8959&type=s2&mount=1"></audio>
+
+    <br>
+
+    <button onclick="playRadio()">▶ Play</button>
+    <button onclick="pauseRadio()">⏸ Pause</button>
+</div>
+
+<script>
+function playRadio() {
+    document.getElementById("radio").play();
+}
+
+function pauseRadio() {
+    document.getElementById("radio").pause();
+}
+</script>
+
+</body>
+</html>

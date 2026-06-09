@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OREMRD - Organización Evangélica Misionera</title>
+    <meta name="description" content="OREMRD - Devocionales cristianos, Radio Masada en vivo y reflexiones bíblicas para fortalecer tu fe.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header siempre arriba -->
+    <header class="site-header" style="position:fixed;top:0;left:0;width:100%;z-index:100;background:#222;color:#fff;box-shadow:0 2px 16px #0008;">
+        <div class="header-inner">
+            <div class="logo"><a href="index.html">OREMRD</a></div>
+            <nav class="main-nav">
+                <button class="menu-toggle" aria-label="Menú"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">INICIO</a></li>
+                    <li><a href="nosotros.html">NOSOTROS</a></li>
+                    <li><a href="radio.html">RADIO</a></li>
+                    <li><a href="contacto.html">CONTACTO</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button id="searchToggle" class="nav-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                    <button id="darkModeToggle" class="nav-icon-btn" aria-label="Modo oscuro"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Imagen evangelica debajo del header -->
+    <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
+        <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
+        <!-- Aquí puedes agregar más contenido, posts, widgets, etc. -->
+    </div>
+
+    <!-- ...existing code... -->
+            </div>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const mainAudio = document.getElementById('main-radio-audio');
+                const mainPlayBtn = document.getElementById('main-play-btn');
+                const mainPauseBtn = document.getElementById('main-pause-btn');
+                const mainVolumeSlider = document.getElementById('main-volume');
+                if (mainAudio && mainPlayBtn && mainPauseBtn && mainVolumeSlider) {
+                    mainPlayBtn.onclick = function() {
+                        mainAudio.play();
+                        mainPlayBtn.style.display = 'none';
+                        mainPauseBtn.style.display = 'inline-block';
+                    };
+                    mainPauseBtn.onclick = function() {
+                        mainAudio.pause();
+                        mainPlayBtn.style.display = 'inline-block';
+                        mainPauseBtn.style.display = 'none';
+                    };
+                    mainAudio.onpause = function() {
+                        mainPlayBtn.style.display = 'inline-block';
+                        mainPauseBtn.style.display = 'none';
+                    };
+                    mainAudio.onplay = function() {
+                        mainPlayBtn.style.display = 'none';
+                        mainPauseBtn.style.display = 'inline-block';
+                    };
+                    mainVolumeSlider.oninput = function() {
+                        mainAudio.volume = this.value;
+                    };
+                    mainAudio.volume = mainVolumeSlider.value || 0.8;
+                    // Intentar autoplay una vez (puede ser bloqueado por el navegador)
+                    mainAudio.play().catch(function(){ /* Autoplay puede ser bloqueado */ });
+                }
+            } catch (e) { console.warn('Init player skipped:', e); }
+        });
+        </script>
+
+        <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+        <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-box">
+            <button id="searchClose" class="search-close"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-search"></i> Buscar en OREMRD</h3>
+            <input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slides">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1100&h=550&fit=crop');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2><a href="post1.html">Dios no ha terminado contigo</a></h2>
+                        <p>A veces sentimos que hemos fallado demasiado, que no estamos donde deberíamos, o que no somos lo suficie...</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1100&h=550&fit=crop');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2><a href="post2.html">La dignidad de un cristiano está en su honestidad</a></h2>
+                        <p>La punta de lanza de todo buen cristiano debe ser siempre un testimonio de alta integridad...</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1100&h=550&fit=crop');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2><a href="post3.html">Todavía no es necesariamente el final</a></h2>
+                        <p>Por experiencia propia sé lo decepcionante que puede ser confiar en el Señor y, aun así...</p>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-btn prev-btn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+            <div class="slider-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Radio Player Bar -->
+    <!-- Se eliminan reproductores alternativos. Solo queda el principal arriba -->
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-wrapper">
+        <div class="content-area">
+            <!-- Post 1 -->
+            <article class="post-card" id="post1">
+                <div class="post-image">
+                    <a href="post1.html"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&h=450&fit=crop" alt="Dios no ha terminado contigo"></a>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title"><a href="post1.html">DIOS NO HA TERMINADO CONTIGO</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar-alt"></i> abril 30, 2025</span>
+                        <span class="post-author"><i class="far fa-user"></i> OREMRD</span>
+                    </div>
+                    <p class="post-excerpt">A veces sentimos que hemos fallado demasiado, que no estamos donde deberíamos, o que no somos lo suficientemente fuertes. Pero déjame decirte algo con toda certeza: dios no ha terminado contigo. Él no se cansa de ti, no te ha dejado atrás, y no se ha rendido contigo. Aunque te hayas de…</p>
+                    <div class="post-footer">
+                        <a href="post1.html" class="read-more">Leer Mas »</a>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="share-btn copy-link" aria-label="Copiar enlace"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card" id="post2">
+                <div class="post-image">
+                    <a href="post2.html"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&h=450&fit=crop" alt="La dignidad de un cristiano"></a>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title"><a href="post2.html">LA DIGNIDAD DE UN CRISTIANO ESTÁ EN SU HONESTIDAD</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar-alt"></i> abril 30, 2025</span>
+                        <span class="post-author"><i class="far fa-user"></i> OREMRD</span>
+                    </div>
+                    <p class="post-excerpt">La punta de lanza de todo buen cristiano debe ser siempre un testimonio de alta integridad. Más allá de lo que decimos con palabras, nuestra vida debe hablar con hechos. No se trata solo de predicar, sino de vivir lo que predicamos. Porque cuando alguien observa a un verdadero siervo d…</p>
+                    <div class="post-footer">
+                        <a href="post2.html" class="read-more">Leer Mas »</a>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="share-btn copy-link" aria-label="Copiar enlace"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card" id="post3">
+                <div class="post-image">
+                    <a href="post3.html"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=450&fit=crop" alt="Todavía no es el final"></a>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title"><a href="post3.html">TODAVÍA NO ES NECESARIAMENTE EL FINAL</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar-alt"></i> abril 30, 2025</span>
+                        <span class="post-author"><i class="far fa-user"></i> OREMRD</span>
+                    </div>
+                    <p class="post-excerpt">Por experiencia propia sé lo decepcionante que puede ser confiar en el Señor y, aun así, ver que todo parece haberse perdido. Que las puertas se cierran, que los sueños mueren, y que la derrota final se asoma sin que nada ni nadie pueda evitarlo. Pero quiero que sepas algo importante: es…</p>
+                    <div class="post-footer">
+                        <a href="post3.html" class="read-more">Leer Mas »</a>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="share-btn copy-link" aria-label="Copiar enlace"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="post-card" id="post4">
+                <div class="post-image">
+                    <a href="post4.html"><img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&h=450&fit=crop" alt="La integridad"></a>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title"><a href="post4.html">LA INTEGRIDAD, EL VALOR MÁS GRANDE</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar-alt"></i> abril 30, 2025</span>
+                        <span class="post-author"><i class="far fa-user"></i> OREMRD</span>
+                    </div>
+                    <p class="post-excerpt">David se presenta delante de Dios para defender su causa, y no lo hace basándose en la cantidad de oraciones que ha hecho, ni en cuánto ha leído las Escrituras. No dice: "porque yo en mi oración he andado", ni "porque he meditado constantemente en tu ley", sino que declara con confianza:…</p>
+                    <div class="post-footer">
+                        <a href="post4.html" class="read-more">Leer Mas »</a>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="share-btn copy-link" aria-label="Copiar enlace"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="widget widget-follow">
+                <h3 class="widget-title">SIGUENOS</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/oremdr" target="_blank" rel="noopener" class="social-link facebook-link"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+                    <a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank" rel="noopener" class="social-link youtube-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+                </div>
+            </div>
+
+            <div class="widget widget-popular">
+                <h3 class="widget-title">MAS VISTOS</h3>
+                <ul class="popular-posts">
+                    <li><a href="post2.html"><div class="popular-thumb"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=120&h=80&fit=crop" alt=""></div><div class="popular-info"><h4>LA DIGNIDAD DE UN CRISTIANO ESTÁ EN SU HONESTIDAD</h4><p>La punta de lanza de todo buen cristiano debe ser siempre un testimonio de alta integrida…</p></div></a></li>
+                    <li><a href="post3.html"><div class="popular-thumb"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=120&h=80&fit=crop" alt=""></div><div class="popular-info"><h4>TODAVÍA NO ES NECESARIAMENTE EL FINAL</h4><p>Por experiencia propia sé lo decepcionante que puede ser confiar en el Señor y, aun así, …</p></div></a></li>
+                    <li><a href="post1.html"><div class="popular-thumb"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=120&h=80&fit=crop" alt=""></div><div class="popular-info"><h4>DIOS NO HA TERMINADO CONTIGO</h4><p>A veces sentimos que hemos fallado demasiado, que no estamos donde deberíamos, o que no …</p></div></a></li>
+                </ul>
+            </div>
+
+            <div class="widget widget-recent">
+                <h3 class="widget-title">RECIENTES</h3>
+                <ul class="recent-posts">
+                    <li><a href="post1.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>DIOS NO HA TERMINADO CONTIGO</h4><p>A veces sentimos que hemos fallado demasiado, que no estamos donde deberíamos, o que no somos lo suficie...</p></div></a></li>
+                    <li><a href="post2.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>LA DIGNIDAD DE UN CRISTIANO ESTÁ EN SU HONESTIDAD</h4><p>La punta de lanza de todo buen cristiano debe ser siempre un testimonio de alta integridad. Más allá de lo que...</p></div></a></li>
+                    <li><a href="post3.html"><div class="recent-thumb"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=100&h=100&fit=crop" alt=""></div><div class="recent-info"><h4>TODAVÍA NO ES NECESARIAMENTE EL FINAL</h4><p>Por experiencia propia sé lo decepcionante que puede ser confiar en el Señor y, aun así, ver que todo parece h...</p></div></a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="widget widget-newsletter">
+                <h3 class="widget-title">SUSCRÍBETE</h3>
+                <p class="newsletter-text">Recibe devocionales en tu correo</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Suscribirse</button>
+                </form>
+                <span class="subscriber-count"><span id="subscriberCount">0</span> suscritos</span>
+            </div>
+
+            <div class="widget widget-image">
+                <img src="https://i.imgur.com/VB4BOa9.png" alt="Imagen centrada" class="centered-image">
+            </div>
+
+            <div class="widget widget-countries">
+                <h3 class="widget-title">PAISES</h3>
+                                <div class="countries-list">
+                                        <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_the_Dominican_Republic.svg" alt="RD"><span>República Dominicana</span></div>
+                                        <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Flag_of_Cuba.svg" alt="Cuba"><span>Cuba</span></div>
+                                        <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg" alt="PR"><span>Puerto Rico</span></div>
+                                        <div class="country-item"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="US"><span>Estados Unidos</span></div>
+                                </div>
+                                <div style="margin-top:1em;text-align:center;">
+                                    <a href="#HTML6">
+                                        <img src="#HTML6 > div > a > img" alt="Flag Counter" style="border:0;max-width:100%;height:auto;">
+                                    </a>
+                                    <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773289011/image_ydlixa.png" alt="Imagen Cloudinary" style="margin-top:8px;max-width:100%;height:auto;">
+                                </div>
+                                <div style="margin-top:1em;text-align:center;">
+                                </div>
+                </div>
+                <div style="margin-top:1em;text-align:center;">
+                    <a href="https://info.flagcounter.com/GC4I" target="_blank">
+                        <img src="https://s01.flagcounter.com/count2/GC4I/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" style="border:0;max-width:100%;height:auto;">
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+            <!-- Reproductor embebido (reemplazado por diseño simplificado) -->
+            <style>
+            /* Estilos locales del reproductor simplificado */
+            .player-simple { background:#222; color:#fff; padding:18px; border-radius:10px; display:inline-block; }
+            .player-simple button { padding:10px 18px; margin:8px; border:none; border-radius:6px; background:orange; color:#fff; cursor:pointer; }
+            </style>
+            <div style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:9999;">
+                <div class="player-simple" role="region" aria-label="Radio Masada">
+                    <h4 style="margin:0 0 8px 0;">📻 Radio Masada</h4>
+                    <audio id="radio" preload="none" crossorigin="anonymous" style="width:300px;display:block;margin:0 auto 8px auto;">
+                        <source src="https://uk16freenew.listen2myradio.com/live.mp3?typeportmount=s1_12175_stream_61395715" type="audio/mpeg">
+                        Tu navegador no soporta audio HTML5.
+                    </audio>
+                    <div id="radio-status" style="color:#ffc107;margin-top:6px;font-size:0.95em;">Estado: esperando interacción</div>
+                    <div style="text-align:center;">
+                        <button id="play-simple">▶ Play</button>
+                        <button id="pause-simple">⏸ Pause</button>
+                    </div>
+                </div>
+            </div>
+        <div class="footer-inner">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>OREMRD</h3>
+                    <p>Organización Evangélica Misionera de la República Dominicana. Llevando la Palabra de Dios a todas las naciones.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>ENLACES</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="radio.html">Radio Masada</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>SIGUENOS</h3>
+                    <div class="footer-social-links">
+                        <a href="https://www.facebook.com/oremdr" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        <a href="https://www.youtube.com/watch?v=rqiG5h7loq4" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="index.html">OREMRD</a> — Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Control simple del reproductor embebido
+    document.addEventListener('DOMContentLoaded', function(){
+        var audio = document.getElementById('radio');
+        var playBtn = document.getElementById('play-simple');
+        var pauseBtn = document.getElementById('pause-simple');
+        var status = document.getElementById('radio-status');
+        if (!audio) return;
+        function setStatus(msg, color){ if(status){ status.textContent = 'Estado: ' + msg; if(color) status.style.color = color; } }
+
+        if (playBtn) playBtn.addEventListener('click', function(){
+            setStatus('conectando...', '#ffc107');
+            audio.play().then(function(){ setStatus('reproduciendo', '#4caf50'); }).catch(function(err){
+                console.error('Audio play error:', err);
+                setStatus('no se pudo reproducir — revisa la consola (CORS/u otra razón)', '#f44336');
+            });
+        });
+        if (pauseBtn) pauseBtn.addEventListener('click', function(){ audio.pause(); setStatus('pausado', '#bbb'); });
+
+        // Eventos para diagnosticar problemas
+        audio.addEventListener('error', function(e){
+            console.error('Audio element error event:', e);
+            setStatus('error al cargar el stream (ver consola)', '#f44336');
+        });
+        audio.addEventListener('stalled', function(){ setStatus('stalled — problema de red', '#f44336'); });
+        audio.addEventListener('waiting', function(){ setStatus('esperando datos...', '#ffc107'); });
+        audio.addEventListener('canplay', function(){ setStatus('listo para reproducir', '#4caf50'); });
+        audio.addEventListener('playing', function(){ setStatus('reproduciendo', '#4caf50'); });
+        audio.addEventListener('suspend', function(){ setStatus('suspendido', '#f44336'); });
+    });
+    </script>
+    <script src="script.js"></script>
+
+<!-- Contador DZCounter -->
+<script src="https://www.dzcounter.com/widget.js"
+ data-site="jesusmirey032023"
+ data-url="https://quiricojuanalexander-hash.github.io/radiomasada.com/index.html"
+ data-lang="en"
+ data-top="10"
+ data-bg="#f9f9f9"
+ data-text="#222222"
+ data-bar="#006233"
+ data-width="320"
+ data-total="1"></script>
+
+</body>
+</html>
