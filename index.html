@@ -8,6 +8,32 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        #urladdress, #stream_type, #radio_in_frame { display: none; }
+        .radio-player-wrap {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .radio-player-wrap h2 { color: #f90; font-family: 'Oswald', sans-serif; font-size: 28px; margin-bottom: 5px; }
+        .radio-player-wrap p { color: #aaa; margin-bottom: 20px; }
+        .jp-video { margin: 0 auto; max-width: 640px; }
+        .jp-video-270p { width: 100%; }
+        .jp-interface { background: #222 !important; }
+        .jp-controls-holder { background: #333 !important; }
+        .jp-progress { background: #444 !important; }
+        .jp-seek-bar { background: #555 !important; }
+        .jp-play-bar { background: #f90 !important; }
+        .jp-volume-bar { background: #444 !important; }
+        .jp-volume-bar-value { background: #f90 !important; }
+        .jp-current-time, .jp-duration { color: #ccc !important; }
+        .radio-status-text { color: #4caf50; font-size: 14px; margin-top: 10px; }
+        .radio-status-text.offline { color: #f44336; }
+    </style>
 </head>
 <body>
     <!-- Header siempre arriba -->
@@ -32,51 +58,66 @@
     <!-- Imagen evangelica debajo del header -->
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
-        <!-- Aquí puedes agregar más contenido, posts, widgets, etc. -->
+
+        <!-- Reproductor Radio Masada -->
+        <div class="radio-player-wrap">
+            <h2>Radio Masada</h2>
+            <p>Somos un canal cristiano evangélico — Dios te Bendiga</p>
+            <div id="jp_container_1" class="jp-video jp-video-270p">
+                <div class="jp-type-playlist">
+                    <div class="jp-gui">
+                        <div class="jp-video-play">
+                            <a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+                        </div>
+                        <div class="jp-interface clearfix">
+                            <div class="jp-controls-holder clearfix">
+                                <ul class="jp-controls">
+                                    <li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
+                                    <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                    <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                    <li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
+                                    <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                                </ul>
+                                <div class="progresRight clearfix">
+                                    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                    <div class="player_title_outer">
+                                        <div class="title_radio">
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightSattings clearfix">
+                                    <div class="muteOuter clearfix">
+                                        <a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a>
+                                        <a class="listingIcon" href="#"></a>
+                                        <a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a>
+                                        <div class="jp-volume-bar">
+                                            <div class="jp-volume-bar-value"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jp-playlist visibl_none">
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="radio-status-text" id="radioStatusText">Presiona Play para escuchar</div>
+        </div>
     </div>
 
-    <!-- ...existing code... -->
-            </div>
-        </div>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                const mainAudio = document.getElementById('main-radio-audio');
-                const mainPlayBtn = document.getElementById('main-play-btn');
-                const mainPauseBtn = document.getElementById('main-pause-btn');
-                const mainVolumeSlider = document.getElementById('main-volume');
-                if (mainAudio && mainPlayBtn && mainPauseBtn && mainVolumeSlider) {
-                    mainPlayBtn.onclick = function() {
-                        mainAudio.play();
-                        mainPlayBtn.style.display = 'none';
-                        mainPauseBtn.style.display = 'inline-block';
-                    };
-                    mainPauseBtn.onclick = function() {
-                        mainAudio.pause();
-                        mainPlayBtn.style.display = 'inline-block';
-                        mainPauseBtn.style.display = 'none';
-                    };
-                    mainAudio.onpause = function() {
-                        mainPlayBtn.style.display = 'inline-block';
-                        mainPauseBtn.style.display = 'none';
-                    };
-                    mainAudio.onplay = function() {
-                        mainPlayBtn.style.display = 'none';
-                        mainPauseBtn.style.display = 'inline-block';
-                    };
-                    mainVolumeSlider.oninput = function() {
-                        mainAudio.volume = this.value;
-                    };
-                    mainAudio.volume = mainVolumeSlider.value || 0.8;
-                    // Intentar autoplay una vez (puede ser bloqueado por el navegador)
-                    mainAudio.play().catch(function(){ /* Autoplay puede ser bloqueado */ });
-                }
-            } catch (e) { console.warn('Init player skipped:', e); }
-        });
-        </script>
+    <!-- Radio config oculta -->
+    <div id="radio_gmt" style="display:none">Caracas</div>
+    <div id="radio_id_tag" style="display:none">3389951</div>
+    <div id="radio_in_frame" style="display:none">show</div>
+    <div id="stream_type" style="display:none">audio</div>
+    <div id="urladdress" style="display:none">https://fdsfdsfdsf.radio12345.com/intro.mp3</div>
 
-        <a href="#main-content" class="skip-link">Ir al contenido principal</a>
-        <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
 
 
     <!-- Search Overlay -->
@@ -125,8 +166,7 @@
         </div>
     </section>
 
-    <!-- Radio Player Bar -->
-    <!-- Se eliminan reproductores alternativos. Solo queda el principal arriba -->
+
 
     <!-- Main Content -->
     <main id="main-content" class="main-wrapper">
@@ -299,26 +339,6 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-            <!-- Reproductor embebido (reemplazado por diseño simplificado) -->
-            <style>
-            /* Estilos locales del reproductor simplificado */
-            .player-simple { background:#222; color:#fff; padding:18px; border-radius:10px; display:inline-block; }
-            .player-simple button { padding:10px 18px; margin:8px; border:none; border-radius:6px; background:orange; color:#fff; cursor:pointer; }
-            </style>
-            <div style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:9999;">
-                <div class="player-simple" role="region" aria-label="Radio Masada">
-                    <h4 style="margin:0 0 8px 0;">📻 Radio Masada</h4>
-                    <audio id="radio" preload="none" crossorigin="anonymous" style="width:300px;display:block;margin:0 auto 8px auto;">
-                        <source src="http://uk26freenew.listen2myradio.com:30818/;stream.mp3" type="audio/mpeg">
-                        Tu navegador no soporta audio HTML5.
-                    </audio>
-                    <div id="radio-status" style="color:#ffc107;margin-top:6px;font-size:0.95em;">Estado: esperando interacción</div>
-                    <div style="text-align:center;">
-                        <button id="play-simple">▶ Play</button>
-                        <button id="pause-simple">⏸ Pause</button>
-                    </div>
-                </div>
-            </div>
         <div class="footer-inner">
             <div class="footer-columns">
                 <div class="footer-col">
@@ -347,35 +367,39 @@
             </div>
         </div>
     </footer>
+    <!-- JPlayer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/add-on/jplayer.playlist.min.js"></script>
     <script>
-    // Control simple del reproductor embebido
-    document.addEventListener('DOMContentLoaded', function(){
-        var audio = document.getElementById('radio');
-        var playBtn = document.getElementById('play-simple');
-        var pauseBtn = document.getElementById('pause-simple');
-        var status = document.getElementById('radio-status');
-        if (!audio) return;
-        function setStatus(msg, color){ if(status){ status.textContent = 'Estado: ' + msg; if(color) status.style.color = color; } }
-
-        if (playBtn) playBtn.addEventListener('click', function(){
-            setStatus('conectando...', '#ffc107');
-            audio.play().then(function(){ setStatus('reproduciendo', '#4caf50'); }).catch(function(err){
-                console.error('Audio play error:', err);
-                setStatus('no se pudo reproducir — revisa la consola (CORS/u otra razón)', '#f44336');
-            });
+    $(document).ready(function(){
+        var statusText = $('#radioStatusText');
+        var urlstream = $('#urladdress').html().trim();
+        new jPlayerPlaylist({
+            jPlayer: '#jquery_jplayer_1',
+            cssSelectorAncestor: '#jp_container_1'
+        }, [
+            { mp3: urlstream }
+        ], {
+            playlistOptions: { autoPlay: true },
+            swfPath: 'https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer',
+            supplied: 'mp3',
+            smoothPlayBar: true,
+            keyEnabled: true,
+            audioFullScreen: true
         });
-        if (pauseBtn) pauseBtn.addEventListener('click', function(){ audio.pause(); setStatus('pausado', '#bbb'); });
-
-        // Eventos para diagnosticar problemas
-        audio.addEventListener('error', function(e){
-            console.error('Audio element error event:', e);
-            setStatus('error al cargar el stream (ver consola)', '#f44336');
+        $('#jquery_jplayer_1').on($.jPlayer.event.error, function() {
+            statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
         });
-        audio.addEventListener('stalled', function(){ setStatus('stalled — problema de red', '#f44336'); });
-        audio.addEventListener('waiting', function(){ setStatus('esperando datos...', '#ffc107'); });
-        audio.addEventListener('canplay', function(){ setStatus('listo para reproducir', '#4caf50'); });
-        audio.addEventListener('playing', function(){ setStatus('reproduciendo', '#4caf50'); });
-        audio.addEventListener('suspend', function(){ setStatus('suspendido', '#f44336'); });
+        $('#jquery_jplayer_1').on($.jPlayer.event.waiting, function() {
+            statusText.text('Cargando...').removeClass('offline');
+        });
+        $('#jquery_jplayer_1').on($.jPlayer.event.playing, function() {
+            statusText.text('Reproduciendo en vivo').removeClass('offline');
+        });
+        $('#jquery_jplayer_1').on($.jPlayer.event.pause, function() {
+            statusText.text('Pausado').addClass('offline');
+        });
     });
     </script>
     <script src="script.js"></script>

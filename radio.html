@@ -36,10 +36,11 @@
     <header class="site-header"><div class="header-inner"><div class="logo"><a href="index.html">OREMRD</a></div><nav class="main-nav"><button class="menu-toggle" aria-label="Menú"><i class="fas fa-bars"></i></button><ul class="nav-links"><li><a href="index.html">INICIO</a></li><li><a href="nosotros.html">NOSOTROS</a></li><li><a href="radio.html" class="active">RADIO</a></li><li><a href="contacto.html">CONTACTO</a></li></ul><div class="nav-actions"><button id="searchToggle" class="nav-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></button><button id="darkModeToggle" class="nav-icon-btn" aria-label="Modo oscuro"><i class="fas fa-moon"></i></button></div></nav></div></header>
     <div id="searchOverlay" class="search-overlay"><div class="search-box"><button id="searchClose" class="search-close"><i class="fas fa-times"></i></button><h3><i class="fas fa-search"></i> Buscar en OREMRD</h3><input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off"><div id="searchResults" class="search-results"></div></div></div>
 
-    <div id="radio_gmt" style="display:none"></div>
-    <div id="radio_id_tag" style="display:none">3429603</div>
+    <div id="radio_gmt" style="display:none">Caracas</div>
+    <div id="radio_id_tag" style="display:none">3389951</div>
+    <div id="radio_in_frame" style="display:none">show</div>
     <div id="stream_type" style="display:none">audio</div>
-    <div id="urladdress" style="display:none">http://uk26freenew.listen2myradio.com:30818/;stream.mp3</div>
+    <div id="urladdress" style="display:none">https://fdsfdsfdsf.radio12345.com/intro.mp3</div>
 
     <main id="main-content" class="main-wrapper">
         <div class="content-area">
@@ -140,65 +141,17 @@
     <script>
     $(document).ready(function(){
         var statusText = $('#radioStatusText');
-        var jplayer = $('#jquery_jplayer_1');
-
-        function initPlayer(streamUrl) {
-            new jPlayerPlaylist({
-                jPlayer: '#jquery_jplayer_1',
-                cssSelectorAncestor: '#jp_container_1'
-            }, [
-                { mp3: streamUrl }
-            ], {
-                playlistOptions: { autoPlay: false },
-                swfPath: 'https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer',
-                supplied: 'mp3',
-                smoothPlayBar: true,
-                keyEnabled: true,
-                audioFullScreen: true,
-                solution: 'html, flash'
-            });
-
-            jplayer.on($.jPlayer.event.error, function(e) {
-                statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
-            });
-            jplayer.on($.jPlayer.event.waiting, function() {
-                statusText.text('Cargando...').removeClass('offline');
-            });
-            jplayer.on($.jPlayer.event.playing, function() {
-                statusText.text('Reproduciendo en vivo').removeClass('offline');
-            });
-            jplayer.on($.jPlayer.event.pause, function() {
-                statusText.text('Pausado').addClass('offline');
-            });
-        }
-
-        function refreshStreamUrl() {
-            $.get('https://oremrdorg.radiostream321.com/index.php', function(html) {
-                var match = html.match(/id="urladdress">\s*([^<]+)/);
-                if (match && match[1]) {
-                    var newUrl = match[1].trim();
-                    $('#urladdress').text(newUrl);
-                    statusText.text('URL del stream actualizada. Recarga para aplicar.').removeClass('offline');
-                }
-            });
-        }
-
         var urlstream = $('#urladdress').html().trim();
-        initPlayer(urlstream);
 
         new jPlayerPlaylist({
             jPlayer: '#jquery_jplayer_1',
             cssSelectorAncestor: '#jp_container_1'
         }, [
-            {
-                mp3: urlstream
-            }
+            { mp3: urlstream }
         ], {
-            playlistOptions: {
-                autoPlay: false
-            },
+            playlistOptions: { autoPlay: true },
             swfPath: 'https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer',
-            supplied: 'mp3,oga',
+            supplied: 'mp3',
             smoothPlayBar: true,
             keyEnabled: true,
             audioFullScreen: true
@@ -207,15 +160,12 @@
         $('#jquery_jplayer_1').on($.jPlayer.event.error, function(e) {
             statusText.text('No se pudo conectar — la emisora puede estar fuera del aire').addClass('offline');
         });
-
         $('#jquery_jplayer_1').on($.jPlayer.event.waiting, function() {
             statusText.text('Cargando...').removeClass('offline');
         });
-
         $('#jquery_jplayer_1').on($.jPlayer.event.playing, function() {
             statusText.text('Reproduciendo en vivo').removeClass('offline');
         });
-
         $('#jquery_jplayer_1').on($.jPlayer.event.pause, function() {
             statusText.text('Pausado').addClass('offline');
         });
