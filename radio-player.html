@@ -6,28 +6,39 @@
 
 <style>
 body {
-    background: #111;
+    background: #0d0d0d;
     color: white;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .player {
-    background: #222;
+    background: #1a1a1a;
     padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
+    border-radius: 15px;
+    width: 300px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
+    background: #00c853;
     border: none;
-    border-radius: 5px;
-    background: orange;
+    padding: 10px 20px;
     color: white;
+    font-size: 16px;
+    border-radius: 8px;
     cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background: #00e676;
+}
+
+h2 {
+    margin-bottom: 10px;
 }
 </style>
 
@@ -36,8 +47,9 @@ button {
 
 <div class="player">
     <h2>📻 Radio Masada</h2>
-    
-    <audio id="radio" controls preload="none" src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_23756_stream_375931828"></audio>
+    <audio id="radio" controls preload="none" src="https://uk26freenew.listen2myradio.com/live.mp3?typeportmount=s1_10571_stream_721181640">
+        Tu navegador no soporta audio.
+    </audio>
 
     <br>
 
