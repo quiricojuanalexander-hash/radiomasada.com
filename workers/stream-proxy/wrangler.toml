@@ -1,6 +1,7 @@
+# Worker config (entrypoint is worker.js in this folder)
 name = "oremrd-stream-proxy"
 compatibility_date = "2026-06-17"
-main = "workers/stream-proxy/worker.js"
+main = "worker.js"
 workers_dev = true
 # Fill `account_id` with your Cloudflare Account ID if you want to publish to your account
 # account_id = "YOUR_ACCOUNT_ID"
