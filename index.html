@@ -27,6 +27,25 @@
         }
         .radio-status-text { color: #4caf50; font-size: 14px; margin-top: 10px; }
         .radio-status-text.offline { color: #f44336; }
+        /* Caster.fm embed wrapper: crop to show only play + volume controls */
+        .caster-embed-wrap {
+            width: 240px;
+            height: 56px;
+            margin: 0 auto 12px auto;
+            overflow: hidden;
+            position: relative;
+            -webkit-mask-image: -webkit-radial-gradient(white, black); /* avoid weird aliasing */
+        }
+        /* enlarge and shift the embed/iframe so only the bottom control row is visible */
+        .caster-embed-wrap .cstrEmbed, .caster-embed-wrap iframe {
+            width: 420px !important;
+            height: 260px !important;
+            border: none !important;
+            transform: translateY(-170px) translateX(-60px) !important;
+            -webkit-transform: translateY(-170px) translateX(-60px) !important;
+            display: block !important;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -52,13 +71,16 @@
     <!-- Imagen evangelica debajo del header -->
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <div class="radio-player-top" style="max-width:700px;margin:0 auto 18px;text-align:center;">
-            <!-- Minimal custom player: only play/pause and volume -->
+            <!-- Caster.fm embed moved to Inicio (cropped visually). Keep native audio as fallback for autoplay and controls. -->
             <audio id="main-radio" preload="auto" playsinline crossorigin="anonymous" src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_23756_stream_375931828" style="display:none"></audio>
-            <div id="simplePlayer" style="display:flex;align-items:center;justify-content:center;gap:12px;">
-                <button id="playBtn" aria-label="Play/Pause" style="width:56px;height:56px;border-radius:50%;border:none;background:#e81e4d;color:#fff;font-size:20px;cursor:pointer;">►</button>
-                <input id="volSlider" type="range" min="0" max="1" step="0.01" value="0.9" style="width:140px;" aria-label="Volumen">
+
+            <div class="caster-embed-wrap" id="casterEmbedTop">
+                <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
+                <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
             </div>
-            <div id="autoplayNotice" class="radio-status-text" style="margin-top:8px; font-size:13px;color:#ddd;display:none">Tu navegador bloqueó la reproducción automática. Presiona Play para escuchar.</div>
+
+            <!-- The Caster.fm embed is visible (cropped) above; keep a hidden native audio as a fallback for autoplay attempts. -->
+            <div id="autoplayNotice" class="radio-status-text" style="margin-top:8px; font-size:13px;color:#ddd;display:none">Tu navegador bloqueó la reproducción automática. Interactúa con la página para comenzar a escuchar.</div>
         </div>
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
     </div>
@@ -314,80 +336,39 @@
         </div>
     </footer>
     <script src="script.js"></script>
-
     <script>
     (function(){
+        // Attempt unmuted autoplay for the hidden native audio. If blocked, wait for user interaction.
         const audio = document.getElementById('main-radio');
-        const playBtn = document.getElementById('playBtn');
-        const volSlider = document.getElementById('volSlider');
         const notice = document.getElementById('autoplayNotice');
+        if (!audio) return;
 
-        if (!audio || !playBtn || !volSlider) return;
-
-        // Initialize volume
-        audio.volume = parseFloat(volSlider.value || 0.9);
-
-        function updatePlayButton() {
-            playBtn.textContent = audio.paused ? '►' : '❚❚';
+        async function tryAutoplay() {
+            try {
+                audio.muted = false;
+                await audio.play();
+                if (notice) notice.style.display = 'none';
+                return true;
+            } catch (err) {
+                console.warn('Autoplay blocked (unmuted):', err);
+                if (notice) notice.style.display = '';
+                // wait for first user interaction to start playback
+                const startOnUser = async function() {
+                    try { await audio.play(); if (notice) notice.style.display = 'none'; }
+                    catch(e){ console.warn('Playback on user interaction failed', e); }
+                    window.removeEventListener('click', startOnUser);
+                    window.removeEventListener('keydown', startOnUser);
+                };
+                window.addEventListener('click', startOnUser, { once: true });
+                window.addEventListener('keydown', startOnUser, { once: true });
+                return false;
+            }
         }
 
-        playBtn.addEventListener('click', async function(){
-            try {
-                if (audio.paused) {
-                    await audio.play();
-                } else {
-                    audio.pause();
-                }
-            } catch (e) {
-                console.warn('Play blocked or failed:', e);
-            }
-            updatePlayButton();
-            if (!audio.paused) notice.textContent = '';
-        });
-
-        volSlider.addEventListener('input', function(){
-            audio.volume = parseFloat(this.value);
-        });
-
-        audio.addEventListener('play', updatePlayButton);
-        audio.addEventListener('pause', updatePlayButton);
-
-        // Attempt autoplay on load with fallbacks: try unmuted, then muted, then show notice
-        window.addEventListener('load', function(){
-            async function tryAutoplay() {
-                try {
-                    // First try unmuted playback
-                    audio.muted = false;
-                    await audio.play();
-                    notice.style.display = 'none';
-                    updatePlayButton();
-                    return;
-                } catch (err) {
-                    console.warn('Unmuted autoplay failed, trying muted fallback:', err);
-                }
-
-                try {
-                    // Try muted autoplay as a fallback
-                    audio.muted = true;
-                    await audio.play();
-                    // Attempt to unmute after a short delay (may be blocked by browser)
-                    setTimeout(()=>{
-                        try {
-                            audio.muted = false;
-                            audio.volume = parseFloat(volSlider.value || 0.9);
-                        } catch(e) { console.warn('Unmute attempt failed', e); }
-                    }, 500);
-                    notice.style.display = 'none';
-                    updatePlayButton();
-                    return;
-                } catch (err2) {
-                    console.warn('Muted autoplay also failed:', err2);
-                    notice.style.display = '';
-                    updatePlayButton();
-                }
-            }
-            tryAutoplay();
-        });
+        // run on DOMContentLoaded to try autoplay early
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryAutoplay);
+        } else { tryAutoplay(); }
     })();
     </script>
 
