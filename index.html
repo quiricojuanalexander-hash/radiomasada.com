@@ -52,9 +52,13 @@
     <!-- Imagen evangelica debajo del header -->
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <div class="radio-player-top" style="max-width:700px;margin:0 auto 18px;text-align:center;">
-            <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-            <script src="https://cdn.cloud.caster.fm/widgets/embed.js" async defer></script>
-            <div class="radio-status-text" id="radioStatusText" style="margin-top:8px;">Presiona Play para escuchar</div>
+            <!-- Minimal custom player: only play/pause and volume -->
+            <audio id="main-radio" preload="auto" crossorigin="anonymous" src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_23756_stream_375931828"></audio>
+            <div id="simplePlayer" style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                <button id="playBtn" aria-label="Play/Pause" style="width:48px;height:48px;border-radius:50%;border:none;background:#e81e4d;color:#fff;font-size:18px;cursor:pointer;">►</button>
+                <input id="volSlider" type="range" min="0" max="1" step="0.01" value="0.9" style="width:140px;" aria-label="Volumen">
+            </div>
+            <div id="autoplayNotice" class="radio-status-text" style="margin-top:8px; font-size:13px;color:#ddd;">Intentando reproducir en cuanto carga...</div>
         </div>
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
     </div>
@@ -310,6 +314,62 @@
         </div>
     </footer>
     <script src="script.js"></script>
+
+    <script>
+    (function(){
+        const audio = document.getElementById('main-radio');
+        const playBtn = document.getElementById('playBtn');
+        const volSlider = document.getElementById('volSlider');
+        const notice = document.getElementById('autoplayNotice');
+
+        if (!audio || !playBtn || !volSlider) return;
+
+        // Initialize volume
+        audio.volume = parseFloat(volSlider.value || 0.9);
+
+        function updatePlayButton() {
+            playBtn.textContent = audio.paused ? '►' : '❚❚';
+        }
+
+        playBtn.addEventListener('click', async function(){
+            try {
+                if (audio.paused) {
+                    await audio.play();
+                } else {
+                    audio.pause();
+                }
+            } catch (e) {
+                console.warn('Play blocked or failed:', e);
+            }
+            updatePlayButton();
+            if (!audio.paused) notice.textContent = '';
+        });
+
+        volSlider.addEventListener('input', function(){
+            audio.volume = parseFloat(this.value);
+        });
+
+        audio.addEventListener('play', updatePlayButton);
+        audio.addEventListener('pause', updatePlayButton);
+
+        // Attempt autoplay on load
+        window.addEventListener('load', function(){
+            const p = audio.play();
+            if (p && typeof p.then === 'function') {
+                p.then(()=>{
+                    notice.textContent = '';
+                    updatePlayButton();
+                }).catch((err)=>{
+                    notice.textContent = 'Tu navegador bloqueó la reproducción automática. Presiona Play para escuchar.';
+                    console.warn('Autoplay prevented:', err);
+                    updatePlayButton();
+                });
+            } else {
+                updatePlayButton();
+            }
+        });
+    })();
+    </script>
 
 <!-- Contador DZCounter -->
 <script src="https://www.dzcounter.com/widget.js"
