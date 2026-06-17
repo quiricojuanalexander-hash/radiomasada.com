@@ -71,16 +71,8 @@
     <!-- Imagen evangelica debajo del header -->
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <div class="radio-player-top" style="max-width:700px;margin:0 auto 18px;text-align:center;">
-            <!-- Caster.fm embed moved to Inicio (cropped visually). Keep native audio as fallback for autoplay and controls. -->
-            <audio id="main-radio" preload="auto" playsinline crossorigin="anonymous" src="https://oremrd-stream-proxy-production.quiricojuanalexander.workers.dev/stream" style="display:none"></audio>
-
-            <div class="caster-embed-wrap" id="casterEmbedTop">
-                <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-                <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
-            </div>
-
-            <!-- The Caster.fm embed is visible (cropped) above; keep a hidden native audio as a fallback for autoplay attempts. -->
-            <div id="autoplayNotice" class="radio-status-text" style="margin-top:8px; font-size:13px;color:#ddd;display:none">Tu navegador bloqueó la reproducción automática. Interactúa con la página para comenzar a escuchar.</div>
+            <!-- Reproductor restaurado en la página de Radio -->
+            <a href="radio.html" class="radio-open-link" style="color:#fff; text-decoration:underline;">Abrir Radio Masada</a>
         </div>
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
     </div>
@@ -336,41 +328,6 @@
         </div>
     </footer>
     <script src="script.js"></script>
-    <script>
-    (function(){
-        // Attempt unmuted autoplay for the hidden native audio. If blocked, wait for user interaction.
-        const audio = document.getElementById('main-radio');
-        const notice = document.getElementById('autoplayNotice');
-        if (!audio) return;
-
-        async function tryAutoplay() {
-            try {
-                audio.muted = false;
-                await audio.play();
-                if (notice) notice.style.display = 'none';
-                return true;
-            } catch (err) {
-                console.warn('Autoplay blocked (unmuted):', err);
-                if (notice) notice.style.display = '';
-                // wait for first user interaction to start playback
-                const startOnUser = async function() {
-                    try { await audio.play(); if (notice) notice.style.display = 'none'; }
-                    catch(e){ console.warn('Playback on user interaction failed', e); }
-                    window.removeEventListener('click', startOnUser);
-                    window.removeEventListener('keydown', startOnUser);
-                };
-                window.addEventListener('click', startOnUser, { once: true });
-                window.addEventListener('keydown', startOnUser, { once: true });
-                return false;
-            }
-        }
-
-        // run on DOMContentLoaded to try autoplay early
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', tryAutoplay);
-        } else { tryAutoplay(); }
-    })();
-    </script>
 
 <!-- Contador DZCounter -->
 <script src="https://www.dzcounter.com/widget.js"
