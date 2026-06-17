@@ -1,0 +1,9 @@
+name = "oremrd-stream-proxy"
+compatibility_date = "2026-06-17"
+main = "workers/stream-proxy/worker.js"
+workers_dev = true
+# Fill `account_id` with your Cloudflare Account ID if you want to publish to your account
+# account_id = "YOUR_ACCOUNT_ID"
+# To bind a custom route, set `route` and `zone_id`.
+# route = "example.com/stream"
+# zone_id = "YOUR_ZONE_ID"
