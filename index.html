@@ -67,8 +67,83 @@
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <div class="radio-player-top" style="max-width:700px;margin:0 auto 18px;text-align:center;">
             <!-- Caster.fm embed (original) -->
-            <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-            <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
+                        <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
+                        <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
+                        <button id="casterAutoplayBtn" aria-label="Reproducir Castle FM" style="display:none;margin-top:8px;padding:6px 10px;border-radius:6px;background:#e81e4d;color:#fff;border:0;cursor:pointer;font-size:14px">Reproducir Castle FM</button>
+                        <script>
+                        (function(){
+                            const widgetSelector = '#casterEmbedTop, .cstrEmbed';
+                            const btn = document.getElementById('casterAutoplayBtn');
+
+                            function showBtn(){ if(btn) btn.style.display = 'inline-block'; }
+                            function hideBtn(){ if(btn) btn.style.display = 'none'; }
+
+                            function tryPlayAudioElement(audioEl){
+                                try { audioEl.setAttribute && audioEl.setAttribute('autoplay',''); } catch(e){}
+                                audioEl.play().then(hideBtn).catch(function(err){ console.warn('Autoplay audio failed', err); showBtn(); });
+                                audioEl.addEventListener && audioEl.addEventListener('playing', hideBtn);
+                            }
+
+                            function tryAutoplay(){
+                                var audioEl = document.querySelector('#main-radio, audio');
+                                if(audioEl){ tryPlayAudioElement(audioEl); return; }
+
+                                var widget = document.querySelector(widgetSelector);
+                                if(!widget){ showBtn(); return; }
+
+                                var iframe = widget.querySelector('iframe');
+                                if(iframe){
+                                    try{ iframe.setAttribute('allow','autoplay; encrypted-media'); }catch(e){}
+                                    try{ iframe.contentWindow.postMessage({type:'caster_play_attempt'}, '*'); }catch(e){}
+                                    setTimeout(showBtn, 700);
+                                    return;
+                                }
+
+                                var mo = new MutationObserver(function(muts, obs){
+                                    iframe = widget.querySelector('iframe');
+                                    if(iframe){
+                                        try{ iframe.setAttribute('allow','autoplay; encrypted-media'); }catch(e){}
+                                        try{ iframe.contentWindow.postMessage({type:'caster_play_attempt'}, '*'); }catch(e){}
+                                        setTimeout(showBtn, 700);
+                                        obs.disconnect();
+                                    }
+                                });
+                                mo.observe(widget, { childList: true, subtree: true });
+                                setTimeout(showBtn, 1500);
+                            }
+
+                            if(btn){
+                                btn.addEventListener('click', function onClick(){
+                                    hideBtn();
+                                    var audioEl = document.querySelector('#main-radio, audio');
+                                    if(audioEl){
+                                        audioEl.play().catch(function(){ showBtn(); });
+                                        return;
+                                    }
+                                    var widget = document.querySelector(widgetSelector);
+                                    var iframe = widget && widget.querySelector('iframe');
+                                    if(iframe){
+                                        try{ iframe.setAttribute('allow','autoplay; encrypted-media'); }catch(e){}
+                                        try{ iframe.contentWindow.postMessage({type:'caster_play_click', userGesture:true}, '*'); }catch(e){}
+                                        try{ iframe.focus(); }catch(e){}
+                                        setTimeout(showBtn, 2000);
+                                    } else {
+                                        window.location.href = 'radio.html';
+                                    }
+                                }, { once: true });
+                            }
+
+                            window.addEventListener('message', function(e){
+                                try{
+                                    var d = e.data || {};
+                                    if(d && (d.type === 'playing' || d.status === 'playing' || d.player === 'playing')) hideBtn();
+                                }catch(e){}
+                            });
+
+                            if(document.readyState === 'complete' || document.readyState === 'interactive') tryAutoplay();
+                            else document.addEventListener('DOMContentLoaded', tryAutoplay);
+                        })();
+                        </script>
         </div>
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
     </div>
