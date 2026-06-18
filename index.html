@@ -27,24 +27,19 @@
         }
         .radio-status-text { color: #4caf50; font-size: 14px; margin-top: 10px; }
         .radio-status-text.offline { color: #f44336; }
-        /* Caster.fm embed wrapper: crop to show only play + volume controls */
+        /* Caster.fm embed: leave widget unmodified so it functions normally on the page */
         .caster-embed-wrap {
-            width: 240px;
-            height: 56px;
+            max-width: 420px;
             margin: 0 auto 12px auto;
-            overflow: hidden;
-            position: relative;
-            -webkit-mask-image: -webkit-radial-gradient(white, black); /* avoid weird aliasing */
+            text-align: center;
         }
-        /* enlarge and shift the embed/iframe so only the bottom control row is visible */
         .caster-embed-wrap .cstrEmbed, .caster-embed-wrap iframe {
-            width: 420px !important;
-            height: 260px !important;
+            width: 100% !important;
+            height: auto !important;
             border: none !important;
-            transform: translateY(-170px) translateX(-60px) !important;
-            -webkit-transform: translateY(-170px) translateX(-60px) !important;
             display: block !important;
             pointer-events: auto;
+            transform: none !important;
         }
     </style>
 </head>
@@ -71,11 +66,9 @@
     <!-- Imagen evangelica debajo del header -->
     <div class="main-content-wrapper" style="max-width:900px;margin:6em auto 2em auto;padding:0 2vw;box-sizing:border-box;">
         <div class="radio-player-top" style="max-width:700px;margin:0 auto 18px;text-align:center;">
-            <!-- Caster.fm embed restaurado -->
-            <div class="caster-embed-wrap" id="casterEmbedTop">
-                <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-                <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-            </div>
+            <!-- Caster.fm embed (original) -->
+            <div data-type="newStreamPlayer" data-publicToken="bd577040-7833-43a4-910d-14afc0ce0f08" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
+            <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
         </div>
         <img src="https://res.cloudinary.com/dpoixqarn/image/upload/v1773269015/masada-banner.png_hwvb1x.png" alt="Organización Evangélica Mundial" style="width:100%;border-radius:20px;box-shadow:0 2px 16px #0008;">
     </div>
